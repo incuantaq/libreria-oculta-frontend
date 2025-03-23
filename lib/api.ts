@@ -10,11 +10,13 @@ const POST_GRAPHQL_FIELDS = `
   sys {
     id
   }
+  categoryId
+  slug
 `;
 
 
 async function fetchGraphQL(query: string, preview = false): Promise<any> {
-  return fetch(
+  const response = await fetch(
     `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}`, //ENV???
     {
       method: "POST",
@@ -25,7 +27,8 @@ async function fetchGraphQL(query: string, preview = false): Promise<any> {
       body: JSON.stringify({ query }),
       next: { tags: ["posts"] },
     },
-  ).then((response) => response.json());
+  )/* .then((response) => response.json()); */
+  return await response.json()
 }
 
 function extractPost(fetchResponse: any): any {
@@ -59,7 +62,7 @@ export async function getAllPosts(isDraftMode: boolean, collectionType: Collecti
   console.log("ENTERED getAllPosts")
   const entries = await fetchGraphQL(
     `query {
-      ${collectionType}Collection( preview: false) {
+      bookCollection( preview: false) {
         items {
           ${POST_GRAPHQL_FIELDS}
         }

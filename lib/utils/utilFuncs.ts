@@ -22,7 +22,7 @@ export const generateUniqueArray = (num: number) => {
 }
 
 export const getOptimizedImage = (image: Image) =>
-  image.data[0].attributes.formats.small?.url || image.data[0].attributes.url
+  image.data[0].attributes?.formats?.small?.url || image.data[0].attributes?.url
 
 export const generateBookQuery = ({
   slug,

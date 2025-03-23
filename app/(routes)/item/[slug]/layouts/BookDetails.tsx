@@ -133,7 +133,7 @@ export default function BookDetails({ slug, initialData }: Props) {
             </button>
           </div>
           <span className="text-xl font-semibold">
-            MMK {bookData.price.toLocaleString()}
+            Precio: {bookData.price.toLocaleString()}
           </span>
         </div>
 

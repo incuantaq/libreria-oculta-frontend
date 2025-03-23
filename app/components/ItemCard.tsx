@@ -78,7 +78,7 @@ const ItemCard = ({ className = "", id, title, price, slug, image }: Props) => {
           <h3 className="text-sm">{title}</h3>
         </header>
         <div className="price mb-1 font-medium">
-          <span>MMK: </span>
+          <span>Precio: </span>
           <span>{price.toLocaleString()}</span>
         </div>
         <div className="buttons flex gap-x-2 h-8">

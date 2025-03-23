@@ -59,7 +59,7 @@ const BookDetailsSkeleton = () => {
                 +
               </button>
             </div>
-            <span className="text-xl font-semibold">MMK</span>
+            <span className="text-xl font-semibold">Precio</span>
           </div>
 
           <div className="my-6 flex flex-col-reverse gap-4 md:flex-row md:gap-8">

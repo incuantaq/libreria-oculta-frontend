@@ -1,7 +1,6 @@
 "use client"; // Ensure this file is treated as a client component
 
 import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
-import { getAllPosts } from '@/lib/api';
 
 const BooksContext = createContext<any | null>(null);
 
@@ -14,9 +13,14 @@ export const BooksContextProvider: React.FC<MyProviderProps> = ({ children }) =>
 
     useEffect(() => {
         const fetchData = async () => {
-            const allPosts = await getAllPosts(true, 'book');
-            console.log("Fetched allPosts:", allPosts); 
-            setContextValue(allPosts); 
+            try {
+                const response = await fetch('/api/books');
+                const data = await response.json();
+                console.log("Fetched books:", data);
+                setContextValue(data);
+            } catch (error) {
+                console.error('Error fetching books:', error);
+            }
         };
 
         fetchData();

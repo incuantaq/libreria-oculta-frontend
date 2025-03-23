@@ -127,7 +127,7 @@ const SearchDialog = () => {
                           <div className="text-sm italic opacity-75">
                             by {author_id?.data?.attributes.name}
                           </div>
-                          <div>MMK {price.toLocaleString()}</div>
+                          <div>Precio {price.toLocaleString()}</div>
                         </div>
                       </Link>
                     </li>

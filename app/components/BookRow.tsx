@@ -12,24 +12,32 @@ type Props = {
 }
 
 export default function BookRow({ slug, books }: Props) {
-  const { data, isError, isLoading } = useBooks({
+
+  console.log("books", books);
+  console.log("slug", slug);
+  /* const { data, isError, isLoading } = useBooks({
     initialData: books[slug],
     filter: { slug, limit: 5 },
-  })
+  }) */
+/* 
+  console.log("data", data);
+  console.log("isError", isError);
+  console.log("isLoading", isLoading); */
 
-  if (isLoading || isError) return <CardSkeletons num={5} slug={slug} />
+  /* if (isLoading || isError) return <CardSkeletons num={5} slug={slug} /> */
 
   return (
     <div className="cards-container">
-      {data?.data.map(({ id, attributes }) => {
+      {books[slug]?.data.map(({ id, attributes }) => {
+        console.log("attributes", attributes);
         const { slug, price, title, image } = attributes
         return (
           <ItemCard
             key={id}
             className={`${
-              data.data.length >= 5
+              books[slug]?.data.length >= 5
                 ? "last:hidden sm:last:flex sm:even:hidden md:last:hidden md:even:flex lg:last:flex"
-                : data.data.length === 4
+                : books[slug]?.data.length === 4
                 ? "sm:last:hidden md:sm:last:flex"
                 : ""
             }`}
