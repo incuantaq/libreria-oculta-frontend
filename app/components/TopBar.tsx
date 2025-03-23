@@ -5,6 +5,7 @@ import * as NavigationMenu from "@radix-ui/react-navigation-menu"
 import navLinks from "@/lib/utils/navLinks"
 import CaretDownIcon from "@/icons/CaretDownIcon"
 
+// Multi language support
 const TopBar = () => {
   return (
     <div className="hidden bg-skin-muted text-skin-dark md:block">

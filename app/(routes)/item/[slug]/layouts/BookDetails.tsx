@@ -31,12 +31,14 @@ export default function BookDetails({ slug, initialData }: Props) {
 
   const { data, isLoading, isError } = useBook({ initialData, slug })
 
+  
   if (isLoading || isError) return <BookDetailsSkeleton />
-
+  
   const id = data.data[0].id
   const bookData = data.data[0].attributes
   const bookImageObj = bookData.image.data[0].attributes
   const authorName = bookData.author_id.data.attributes.name
+  console.log("DEMO", bookData.price)
   const categories: { name: string; slug: string }[] =
     bookData.categories.data.map(category => ({
       name: category.attributes.name,

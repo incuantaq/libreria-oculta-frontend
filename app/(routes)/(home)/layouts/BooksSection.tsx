@@ -6,6 +6,7 @@ import CaretDownIcon from "@/icons/CaretDownIcon"
 import { useCategories } from "@/store/server/categories/queries"
 import { Books } from "@/store/server/books/types"
 import { Categories } from "@/store/server/categories/types"
+import { useBooksContext } from "app/context/itemsContext";
 
 const BooksSection = ({
   categories,
@@ -16,6 +17,9 @@ const BooksSection = ({
 }) => {
   const { data } = useCategories({ categories, featured: true })
 
+  const contextValue = useBooksContext();
+  console.log("contextValue", contextValue);
+  
   return (
     <div id="books" className="py-14">
       {data.map(({ name, slug }) => (

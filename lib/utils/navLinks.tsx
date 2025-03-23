@@ -29,18 +29,18 @@ const navLinks: NavLinks = [
     icon: null,
     position: "top-only",
   },
-  {
+  /* {
     name: "Account",
     href: "/account",
     icon: <UserIcon />,
     position: "main",
-  },
-  {
+  }, */
+  /* {
     name: "Wishlist",
     href: "/wishlist",
     icon: <HeartIcon />,
     position: "main",
-  },
+  }, */
 ]
 
 export default navLinks

@@ -62,7 +62,7 @@ const NavBar = () => {
               href="/"
               className="font-serif text-2xl font-semibold md:text-3xl"
             >
-              Next
+              Librería Oculta
             </Link>
           </div>
 
@@ -165,8 +165,8 @@ const NavBar = () => {
         <div className="flex flex-col items-center gap-2">
           <div className="font-serif text-2xl font-medium">Next Book Store</div>
           <p className="text-center">
-            One of the best book stores <br />
-            in Myanmar
+            Tu librería favorita <br />
+            en Cajicá
           </p>
         </div>
 

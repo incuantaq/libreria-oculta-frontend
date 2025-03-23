@@ -1,13 +1,69 @@
 import { BookQueryProps, Books } from "./types"
-import axios from "@/lib/api/axios"
+import axios from "@/lib/oldapi/axios"
 import { generateBookQuery } from "@/utils/utilFuncs"
 import { useQuery } from "@tanstack/react-query"
 
 /* ========== Get Multiple Books ========== */
 export const getBooks = async (props: BookQueryProps): Promise<Books> => {
   const queryString = generateBookQuery(props)
-  const response = await axios.get(`/books?populate=*&${queryString}`)
-  return response.data
+  /* const response = await axios.get(`/books?populate=*&${queryString}`)
+  return response.data */
+  return {
+    data: [{
+      id: 123,
+      attributes: {
+        title: "Book Title",
+        price: 123,
+        description: "Book description",
+        slug: "book-slug",
+        image: {
+          data: [{
+            id: 123,
+            attributes: {
+              url: "https://placehold.co/150",
+              formats: {
+                small: {
+                  url: "https://placehold.co/150",
+                }
+              }
+            }
+          }],
+        },
+        in_stock: true,
+        createdAt: new Date(Date.now()),
+        updatedAt: new Date(Date.now()),
+        publishedAt: new Date(Date.now()),
+        formats: {
+          small: {
+            url: "https://placehold.co/150",
+          }
+        },
+        author_id: {
+          data: {
+            id: 123,
+            attributes: {
+              name: "Author Name",
+              description: null,
+              slug: "author-slug",
+              createdAt: new Date(Date.now()),
+              updatedAt: new Date(Date.now()),
+            },
+          },
+        },
+        categories: {
+          data: {
+            id: 123,
+            attributes: {
+              name: "Category Name",
+              slug: "category-slug",
+              createdAt: new Date(Date.now()),
+              updatedAt: new Date(Date.now()),
+            },
+          },
+        },
+      },
+    }]
+  }
 }
 
 interface UseBooks {
@@ -26,10 +82,66 @@ export const useBooks = ({ initialData, filter, enabled = true }: UseBooks) =>
 
 /* ========== Get Single Book ========== */
 export const getBook = async (slug: string): Promise<Books> => {
-  const response = await axios.get(
+  /* const response = await axios.get(
     `/books?filters[slug][$eq]]=${slug}&populate=*`
-  )
-  return response.data
+  ) */
+  return {
+    data: [{
+      attributes: {
+        title: "single book title",
+        image: {
+          data: [{
+            id: 123,
+            attributes: {
+              url: "https://placehold.co/150",
+              formats: {
+                small: {
+                  url: "https://placehold.co/150",
+                  name: "small",
+                  hash: "hash",
+                  ext: ".webp",
+                  mime: "image/webp",
+                  size: 123, 
+                  path: null,
+                  width: 123,
+                  height: 123,
+                  provider_metadata: {
+                    public_id: "string",
+                    resource_type: "image"
+                  }
+                }
+              }
+            }
+          }],
+        },
+        author_id: {
+          data: {
+            id: 123435,
+            attributes: {
+              name: "Author Name",
+              description: "null 123",
+              slug: "author-slug",
+              createdAt: new Date(Date.now()),
+              updatedAt: new Date(Date.now()),
+            }
+          }
+        },
+        categories: {
+          data: [{
+            id: 1234,
+            attributes: {
+              name: "Author Name",
+              description: "description abc",
+              slug: "author-slug",
+            }
+          }]
+        },
+        price: 200,
+      },
+      id: 1234,
+
+    }]
+  }
 }
 
 export const useBook = ({

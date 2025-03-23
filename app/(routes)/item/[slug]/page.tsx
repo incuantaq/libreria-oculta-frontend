@@ -1,6 +1,6 @@
 import { getBook } from "@/store/server/books/queries"
 import BookDetails from "./layouts/BookDetails"
-import RelatedBooks from "./layouts/RelatedBooks"
+/* import RelatedBooks from "./layouts/RelatedBooks" */
 
 let mockBooks: number[] = []
 for (let index = 1; index < 21; index++) {
@@ -12,7 +12,8 @@ type Props = {
 }
 
 export default async function Page({ params }: Props) {
-  const initialData = await getBook(params.slug)
+  const {slug} = await params;
+  const initialData = await getBook(slug)
 
   const data = initialData.data[0]
   const currentBookId = Number(data.id)
@@ -23,13 +24,13 @@ export default async function Page({ params }: Props) {
 
   return (
     <>
-      <BookDetails slug={params.slug} initialData={initialData} />
+      <BookDetails slug={slug} initialData={initialData} />
       <hr className="border border-skin-dark opacity-5" />
-      <RelatedBooks
+      {/* <RelatedBooks
         author={authorId}
         categories={categoryIds}
         currentBookId={currentBookId}
-      />
+      /> */}
     </>
   )
 }

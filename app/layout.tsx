@@ -1,10 +1,12 @@
 import { Fraunces, Quicksand } from "next/font/google"
-import TopBar from "@/components/TopBar"
+/* import TopBar from "@/components/TopBar" */
 import NavBar from "@/components/NavBar"
 import Footer from "@/components/Footer"
 import Toast from "@/components/Toast"
 import Providers from "./providers"
 import "./globals.css"
+
+import { BooksContextProvider } from "./context/itemsContext";
 
 const fraunces = Fraunces({
   variable: "--font-fraunces",
@@ -86,9 +88,11 @@ export default function RootLayout({
       <body>
         <div className="flex min-h-screen flex-col">
           <Providers>
-            <TopBar />
+            {/* <TopBar /> */}
             <NavBar />
-            {children}
+            <BooksContextProvider>
+              <main>{children}</main>
+            </BooksContextProvider>
             <Footer />
             <Toast />
           </Providers>

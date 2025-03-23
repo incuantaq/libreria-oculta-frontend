@@ -45,7 +45,7 @@ export default function CartItemSection() {
                       <div className="flex flex-col items-center">
                         {mounted ? <EmptyCartIcon /> : <LoadingIcon />}
                         <span>
-                          {mounted ? "Cart is empty!" : "Cart is loading..."}
+                          {mounted ? "¡Tu carrito está vacío!" : "Cargando tu carrito..."}
                         </span>
                       </div>
                     </td>

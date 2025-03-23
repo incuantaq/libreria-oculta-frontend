@@ -48,7 +48,7 @@ const CartDropdown = () => {
               <div className="mx-3 flex w-64 flex-col items-center">
                 <EmptyCartIcon className="h-12 w-12" />
                 <span className="text-center text-sm opacity-75">
-                  Cart is empty!
+                  ¡Tu carrito está vacío!
                 </span>
               </div>
             </div>

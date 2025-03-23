@@ -81,15 +81,15 @@ const ItemCard = ({ className = "", id, title, price, slug, image }: Props) => {
           <span>MMK: </span>
           <span>{price.toLocaleString()}</span>
         </div>
-        <div className="buttons flex gap-x-2">
+        <div className="buttons flex gap-x-2 h-8">
           <button
             type="button"
             onClick={handleAddToCart}
             className="primary-btn-color flex-1 rounded px-1 text-sm font-semibold"
           >
-            Add To Cart
+            Agregar al carrito
           </button>
-          <button
+          {/* WISHLIST ITEM <button
             type="button"
             className="outline-btn-color basis-1/4 rounded p-1"
             title="Add To Wishlist"
@@ -102,7 +102,7 @@ const ItemCard = ({ className = "", id, title, price, slug, image }: Props) => {
                   : "!stroke-skin-dark"
               }`}
             />
-          </button>
+          </button> */}
         </div>
       </div>
     </article>
