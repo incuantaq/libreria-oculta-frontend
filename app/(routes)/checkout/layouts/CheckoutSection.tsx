@@ -65,15 +65,14 @@ export default function CheckoutSection() {
         Checkout
       </h1>
       <p className="mb-8 text-center lg:mb-14">
-        Provide your payment and delivery address information to finalize your
-        order.
+        Compártenos tu información de pago y entrega para finalizar tu compra.
       </p>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="my-4 md:grid md:grid-cols-2 md:gap-x-6 lg:grid-cols-5 lg:gap-x-10"
       >
         <div className="md:col-span-1 lg:col-span-3">
-          <h2 className="text-xl font-bold">Billing Details</h2>
+          <h2 className="text-xl font-bold">Detalles de Facturación</h2>
           {errorMsg && (
             <span className="error mt-2 inline-block">
               <AlertIcon className="stroke-2 align-text-bottom" /> {errorMsg}
@@ -81,65 +80,65 @@ export default function CheckoutSection() {
           )}
           <div className="mt-4">
             <Input
-              label="Full Name"
-              placeholder="John Doe"
+              label="Nombre Completo"
+              placeholder="Don Quijote de la Mancha​"
               errorMsg={errors?.fullName?.message}
               register={register("fullName", {
                 pattern: {
                   value: /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/,
-                  message: "Please enter a valid full name.",
+                  message: "Por favor, ingresa un nombre completo válido.",
                 },
                 required: {
                   value: true,
-                  message: "This field is required.",
+                  message: "Éste campo es requerido.",
                 },
               })}
             />
 
             <Input
-              label="Email Address"
-              placeholder="johndoe@gmail.com"
+              label="Correo Electrónico"
+              placeholder="donquijote@laimancha.com"
               errorMsg={errors?.email?.message}
               type="email"
               register={register("email", {
                 pattern: {
                   value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                  message: "Please enter a valid email address.",
+                  message: "Por favor, ingresa una dirección de correo electrónico válida.",
                 },
                 required: {
                   value: true,
-                  message: "This field is required.",
+                  message: "Éste campo es requerido.",
                 },
               })}
             />
 
             <Input
-              label="Phone"
-              placeholder="+959501234 (or) 09501234"
+              label="Teléfono Móvil"
+              placeholder="3212345678"
               errorMsg={errors?.phone?.message}
               register={register("phone", {
                 required: {
                   value: true,
-                  message: "This field is required.",
+                  message:"Éste campo es requerido.",
                 },
                 pattern: {
-                  value: /^(\+?95|\+?959|09)?([2-9]\d{6,9})$/,
-                  message: "Please enter a valid phone number.",
+                  value: /^(\+57|57)?3\d{9}$/,
+                  message: "Por favor, ingresa un número de teléfono válido.",
                 },
               })}
             />
 
             <div className="mb-2">
               <label className="font-sans font-medium">
-                Address
+                Dirección
                 <textarea
-                  placeholder="No (27), 11 M, Hledan, Yangon"
+                  placeholder="Plaza del Dulcinea, 1, La Mancha, España"
                   rows={4}
                   className="my-1 block w-full rounded border-2 border-skin-gray bg-skin-base py-1 px-2 font-normal outline-skin-accent"
                   {...register("address", {
                     required: {
                       value: true,
-                      message: "This field is required.",
+                      message: "Éste campo es requerido.",
                     },
                   })}
                 />
@@ -155,13 +154,14 @@ export default function CheckoutSection() {
                 {...register("saveInfo")}
                 className="mr-2 scale-125 accent-skin-accent outline-skin-accent"
               />
-              Save this information for next time
+              Guardar esta información para la próxima compra
             </label>
 
             <div className="my-4">
               <label className="font-sans font-medium">
-                Order Notes (optional)
+                Notas de la Orden (Opcional)
                 <textarea
+                  placeholder="¿Es para regalar? ¿Deseas una nota especial? ¿Requieres envío en embalaje discreto? Cuéntanos aquí."
                   rows={4}
                   className="my-1 block w-full rounded border-2 border-skin-gray bg-skin-base py-1 px-2 font-normal outline-skin-accent"
                   {...register("orderNotes")}
@@ -178,16 +178,16 @@ export default function CheckoutSection() {
             className="text-link mt-4 hidden items-center font-sans underline-offset-8 md:inline-flex"
           >
             <CaretDownIcon className="rotate-90 stroke-skin-dark stroke-1" />{" "}
-            Return to Cart
+            Volver al Carrito
           </Link>
         </div>
 
         {/* ===== Order Summary Section ===== */}
         <div className="my-4 flex flex-col gap-3 rounded bg-skin-muted p-4 md:col-span-1 md:p-6 lg:col-span-2 lg:my-0 lg:p-8">
-          <h2 className="text-center text-lg font-semibold">Order Summary</h2>
+          <h2 className="text-center text-lg font-semibold">Resumen de la Orden</h2>
 
           <div className="flex justify-between font-semibold">
-            <span>Item</span>
+            <span>Ítem</span>
             <span>Subtotal</span>
           </div>
           <hr />
@@ -207,18 +207,18 @@ export default function CheckoutSection() {
 
           {/* Coupon Code */}
           <div>
-            <span className="font-medium">Have a Coupon code?</span>
+            <span className="font-medium">¿Tienes un cupón de descuento?</span>
             <div className="mt-1 flex justify-between">
               <input
                 type="text"
-                aria-label="Coupon Code"
+                aria-label="Cupón de Descuento"
                 className="mr-3 flex-1 rounded border-2 border-skin-gray bg-skin-base px-2 outline-skin-accent"
               />
               <button
                 type="button"
                 className="rounded bg-skin-accent px-4 py-1 text-lg font-medium tracking-widest text-skin-base outline-offset-2 hover:bg-opacity-80 active:bg-opacity-100"
               >
-                Apply
+                Aplicar
               </button>
             </div>
           </div>
@@ -233,11 +233,11 @@ export default function CheckoutSection() {
 
           {/* Shipping */}
           <div className="flex items-start justify-between">
-            <span className="flex-1 font-medium">Shipping</span>
+            <span className="flex-1 font-medium">Envío</span>
             <RadioGroup.Root
               className="shipping-options flex flex-1 flex-col gap-2"
               defaultValue={shipping}
-              aria-label="Choose Shipping"
+              aria-label="Elegir Tipo De Envío"
               onValueChange={(val: Shipping) => setShipping(val)}
             >
               <div
@@ -273,8 +273,8 @@ export default function CheckoutSection() {
                   className="ml-auto w-full cursor-pointer rounded bg-skin-gray bg-opacity-40 p-4 text-left font-bold leading-none text-skin-dark shadow-sm"
                   htmlFor="doorToDoor"
                 >
-                  Door to Door:{" "}
-                  <span className="block text-sm font-normal">+ 2,000 Ks</span>
+                  A Domicilio:{" "}
+                  <span className="block text-sm font-normal">+10.000 COP</span>
                 </label>
               </div>
 
@@ -311,7 +311,7 @@ export default function CheckoutSection() {
                   className="ml-auto w-full cursor-pointer rounded bg-skin-gray bg-opacity-40 p-4 text-left font-bold leading-none text-skin-dark shadow-sm"
                   htmlFor="pickup"
                 >
-                  Store Pickup
+                  Recoger en Tienda
                 </label>
               </div>
             </RadioGroup.Root>
@@ -320,7 +320,7 @@ export default function CheckoutSection() {
           {/* Total */}
           <div className="flex items-center justify-between">
             <span className="text-lg font-semibold">Total</span>
-            <span className="text-xl font-semibold">{overallPrice} Ks</span>
+            <span className="text-xl font-semibold">{overallPrice} COP</span>
           </div>
 
           <hr />
@@ -344,7 +344,7 @@ export default function CheckoutSection() {
                 className="ml-auto w-11/12 py-2 pl-2 text-left font-bold leading-none text-skin-dark"
                 htmlFor="cashOnDelivery"
               >
-                Cash on Delivery
+                Pago Contra Entrega
               </label>
             </div>
 
@@ -362,9 +362,10 @@ export default function CheckoutSection() {
                 className="ml-auto w-11/12 pl-2 text-left font-bold leading-none text-skin-dark"
                 htmlFor="bankTransfer"
               >
-                Bank Transfer
+                MercadoPago
                 <span className="mt-1 block text-sm font-normal">
-                  Make your payment directly into our AYA, KBZ, CB, Wave & Kpay
+                  Paga de manera segura. Serás redirigido a la página de
+                  Mercado Pago para completar el pago.
                 </span>
               </label>
             </div>
@@ -376,7 +377,7 @@ export default function CheckoutSection() {
             type="submit"
             className="primary-btn-color rounded border-2 border-skin-dark py-2 font-sans font-semibold"
           >
-            Place Order
+            Finalizar Compra
           </button>
 
           <Link

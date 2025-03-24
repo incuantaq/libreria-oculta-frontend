@@ -17,17 +17,19 @@ const Footer = () => {
       <div className="footer-container mx-auto grid max-w-6xl grid-cols-2 gap-6 px-4 py-10 md:grid-cols-4 md:grid-rows-4 md:gap-x-6 md:gap-y-0 md:px-8 lg:gap-x-8 lg:gap-y-2">
         <div className="bookstore-desc col-span-2 md:row-span-3">
           <h2 className="my-2 font-serif text-xl font-semibold">
-            Next Bookstore
+            Librería Oculta - Cajicá
           </h2>
           <div className="text-sm">
             <p className="my-1">
-              We are an online bookstore that offers a wide selection of books
-              in various genres, including fiction, non-fiction, biographies,
-              and more.
+              Somos una librería en línea de Cajicá que ofrece una amplia
+              selección de libros en diversos géneros, incluyendo ficción, 
+              no ficción, biografías y más.
             </p>
             <p>
-              We provide a convenient and enjoyable shopping experience while
-              offering competitive prices and excellent customer service.
+              Al comprar con nosotros, no solo disfrutas de una experiencia 
+              de compra cómoda y agradable, sino que también te unes a nuestra 
+              comunidad lectora. ¡Apoya nuestro emprendimiento y 
+              haz parte de la Librería Oculta!.
             </p>
           </div>
         </div>
@@ -74,16 +76,16 @@ const Footer = () => {
       </div>
       <div className="copyright-notice-container bg-skin-dark">
         <div className="copyright-notice mx-auto flex max-w-6xl flex-col items-center py-1 px-4 text-skin-base md:flex-row  md:justify-between md:px-8">
-          <span>© Copyright {new Date().getFullYear()} - Next Bookstore</span>
+          <span>© Copyright {new Date().getFullYear()} - Librería Oculta</span>
           <span>
-            Crafted with{" "}
+            Hecho con{" "}
             <HeartIcon className="scale-75 fill-skin-base stroke-skin-base" />{" "}
-            by{" "}
+            por{" "}
             <Link
-              href="https://satnaing.dev"
+              href="https://incuantaq.com"
               className="underline decoration-dashed underline-offset-2 hover:decoration-solid"
             >
-              Sat Naing
+              Incuantaq
             </Link>
             .
           </span>
