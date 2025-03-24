@@ -5,17 +5,14 @@ import Image from "next/image"
 import Link from "next/link"
 import ReactMarkdown from "react-markdown"
 import SocialGroup from "@/components/SocialGroup"
-import BookDetailsSkeleton from "@/loading-ui/BookDetailsSkeleton"
 import HeartIcon from "@/icons/HeartIcon"
 import LoadingIcon from "@/icons/LoadingIcon"
 import { useMounted } from "@/hooks"
 import { useCartStore, useToastStore, useWishlistStore } from "@/store/client"
-import { Books } from "@/store/server/books/types"
-import { useBook } from "@/store/server/books/queries"
 
 type Props = {
   slug: string
-  initialData: Books
+  initialData: any
 }
 
 export default function BookDetails({ slug, initialData }: Props) {
@@ -28,22 +25,13 @@ export default function BookDetails({ slug, initialData }: Props) {
   const { setToast } = useToastStore()
 
   const mounted = useMounted()
-
-  const { data, isLoading, isError } = useBook({ initialData, slug })
-
   
-  if (isLoading || isError) return <BookDetailsSkeleton />
-  
-  const id = data.data[0].id
-  const bookData = data.data[0].attributes
-  const bookImageObj = bookData.image.data[0].attributes
-  const authorName = bookData.author_id.data.attributes.name
-  console.log("DEMO", bookData.price)
-  const categories: { name: string; slug: string }[] =
-    bookData.categories.data.map(category => ({
-      name: category.attributes.name,
-      slug: category.attributes.slug,
-    }))
+  const id = initialData?.slug
+  const bookImageObj = initialData?.coverImage.url
+  const authorName = initialData?.author
+  const title = initialData?.title
+  const description = initialData?.description
+  const price = initialData?.unitPrice
 
   const handleAddToCart = () => {
     addToCart({ id, quantity })
@@ -71,18 +59,18 @@ export default function BookDetails({ slug, initialData }: Props) {
       >
         <div className="relative h-72 w-full overflow-hidden transition-transform duration-500 hover:scale-110 md:h-80 xl:h-96">
           <Image
-            src={bookImageObj.url}
+            src={bookImageObj}
             fill
             priority
-            alt={bookData.title}
+            alt={title}
             className="object-contain"
           />
         </div>
       </div>
       <div className="md:w-3/5">
-        <h1 className="text-xl font-bold md:text-2xl">{bookData.title}</h1>
+        <h1 className="text-xl font-bold md:text-2xl">{title}</h1>
         <div className="book-desc my-2 md:my-4">
-          <ReactMarkdown>{bookData.description}</ReactMarkdown>
+          <ReactMarkdown>{description}</ReactMarkdown>
         </div>
 
         <hr className="my-4 md:my-6" />
@@ -91,7 +79,7 @@ export default function BookDetails({ slug, initialData }: Props) {
           <div>Author :</div>
           <div className="md:col-span-2 lg:col-span-3">{authorName}</div>
 
-          <div>Categories :</div>
+          {/* <div>Categories :</div>
           <div className="md:col-span-2 lg:col-span-3">
             {categories.map((category, index) => (
               <span key={category.slug}>
@@ -104,12 +92,15 @@ export default function BookDetails({ slug, initialData }: Props) {
                 </Link>
               </span>
             ))}
-          </div>
+          </div> */}
 
           <div>Availibility : </div>
           <div className="md:col-span-2 lg:col-span-3">
-            {bookData.in_stock ? "In Stock" : "Waiting time 2 weeks"}
+            En Stock
           </div>
+          {/* <div className="md:col-span-2 lg:col-span-3">
+            {bookData.in_stock ? "In Stock" : "Waiting time 2 weeks"}
+          </div> */}
         </div>
 
         <div className="my-4 flex justify-between md:my-6 md:flex-col-reverse md:gap-y-6">
@@ -133,7 +124,7 @@ export default function BookDetails({ slug, initialData }: Props) {
             </button>
           </div>
           <span className="text-xl font-semibold">
-            Precio: {bookData.price.toLocaleString()}
+            Precio: {price}
           </span>
         </div>
 
