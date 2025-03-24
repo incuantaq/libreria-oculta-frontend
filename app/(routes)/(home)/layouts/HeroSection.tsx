@@ -17,15 +17,15 @@ const HeroSection = () => {
       </div>
       <div className="info-wrapper flex flex-1 flex-col gap-y-4 md:justify-center lg:justify-end lg:gap-y-8">
         <h1 className="font-serif text-4xl font-semibold md:!leading-tight lg:text-5xl xl:text-6xl">
-          Best Place to Find <br />
-          Your Favourite <br />
-          Books.
+          El Mejor Lugar <br />
+          Para Encontrar Libros <br />
+          En Cajicá.
         </h1>
 
         <p className="font-sans xl:text-lg">
-          Unleash your imagination with our online bookstore! Discover a vast
-          selection of books for all ages and interests, with something for
-          everyone. Shop now and find your next favorite read!
+          ¡Desata tu imaginación con nuestra librería online! 
+          Descubre una amplia selección de libros para todas las edades e intereses. 
+          ¡Compra ahora y encuentra tu próxima lectura favorita!
         </p>
 
         <div>
@@ -33,7 +33,7 @@ const HeroSection = () => {
             href="#books"
             className="outline-btn-color inline-block rounded py-2 px-4 text-lg font-semibold"
           >
-            Browse
+            Explora
             <DownArrowIcon className="ml-2 animate-bounce !stroke-skin-dark stroke-2" />
           </a>
         </div>
@@ -41,9 +41,10 @@ const HeroSection = () => {
         <SocialGroup className="!justify-start" />
 
         <div className="mt-12 flex gap-2 divide-x divide-skin-dark md:w-[125%] lg:w-auto">
-          <div className="">Fast Delivery</div>
-          <div className=" pl-2">Exclusive Deals</div>
-          <div className=" pl-2">Curated Collections</div>
+          <div className="">Envío Rápido</div>
+          <div className=" pl-2">Recogida en Tienda</div>
+          <div className=" pl-2">Precios exclusivos</div>
+          
         </div>
       </div>
     </div>

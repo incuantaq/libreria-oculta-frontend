@@ -21,7 +21,7 @@ export default function CartItemSection() {
   return (
     <section className="mb-20 lg:mb-auto">
       <Breadcrumb />
-      <h1 className="font-serif text-xl font-semibold md:text-2xl">My Cart</h1>
+      <h1 className="font-serif text-xl font-semibold md:text-2xl">Mi Carrito</h1>
       <div className="my-4 lg:grid lg:grid-cols-3 lg:gap-x-6">
         <div className="table-wrapper lg:col-span-2 ">
           <div className="lg:min-h-[20.25rem]">
@@ -29,10 +29,10 @@ export default function CartItemSection() {
               <thead className="hidden bg-skin-muted font-sans font-semibold md:table-header-group">
                 <tr>
                   <th colSpan={2} className="w-[42.5%] py-1">
-                    Book Title
+                    Título del Libro
                   </th>
-                  <th className="w-[17.5%] py-1 md:text-right">Price</th>
-                  <th className="w-[17.5%] py-1">Quantity</th>
+                  <th className="w-[17.5%] py-1 md:text-right">Precio</th>
+                  <th className="w-[17.5%] py-1">Cantidad</th>
                   <th colSpan={2} className="w-[22.5%] py-1">
                     Total
                   </th>
@@ -87,7 +87,7 @@ export default function CartItemSection() {
                       <td className="col-span-2 col-start-2 row-start-3 md:text-center">
                         <button
                           type="button"
-                          title="Reduce Quantity"
+                          title="Reducir Cantidad"
                           onClick={() => updateQuantity(item.id, "decrease")}
                           className={`rounded border bg-skin-muted px-3 py-1 text-2xl leading-none ${
                             item.quantity < 2
@@ -103,7 +103,7 @@ export default function CartItemSection() {
                         </span>
                         <button
                           type="button"
-                          title="Reduce Quantity"
+                          title="Aumentar Cantidad"
                           onClick={() => updateQuantity(item.id, "increase")}
                           className="rounded border bg-skin-muted px-3 py-1 text-2xl leading-none"
                         >
@@ -161,7 +161,7 @@ export default function CartItemSection() {
               htmlFor="coupon-code"
               className="mb-2 font-sans font-semibold"
             >
-              Coupon Code
+              Cupón de Descuento
             </label>
             <input
               type="text"
@@ -169,7 +169,7 @@ export default function CartItemSection() {
               className="block w-full rounded border-2 border-skin-gray bg-skin-base py-1 px-2 outline-skin-accent"
             />
             <span className="font-sans text-sm italic opacity-70">
-              Coupon code will be applied on the checkout
+              El cupón de descuento se aplicará en el pago
             </span>
           </div>
           <hr />
@@ -177,12 +177,12 @@ export default function CartItemSection() {
             type="button"
             className="outline-btn-color my-2 rounded border-2 py-1 font-sans shadow hover:shadow-md lg:hidden"
           >
-            Continue Shopping
+            Continuar Comprando
           </button>
           <div className="hidden font-sans text-lg lg:block">
             <div className="mb-4 flex items-baseline justify-between">
-              <span className="text-base">Total Price :</span>
-              <span className="font-semibold">{totalPrice} Ks</span>
+              <span className="text-base">Precio Total:</span>
+              <span className="font-semibold">{totalPrice} COP</span>
             </div>
             <CheckoutButton
               includeIcon

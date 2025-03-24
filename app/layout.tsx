@@ -22,15 +22,15 @@ const quicksand = Quicksand({
 
 export const metadata = {
   title: {
-    default: "Next Bookstore - Your Ultimate Destination for Books",
-    template: "%s | Next Bookstore",
+    default: "Librería Oculta - Tu Destino Único para Libros",
+    template: "%s | Librería Oculta",
   },
   description:
-    "Discover your next favorite book at Next Bookstore! Browse our wide selection of bestsellers, new releases, and rare finds. Feed your reading passion!",
+    "Descubre tu próxima lectura favorita en Librería Oculta. Explora nuestra amplia selección de bestsellers, nuevos lanzamientos y rarezas. ¡Apoya tu pasión por la lectura!",
   openGraph: {
     title: {
-      default: "Next Bookstore - Your Ultimate Destination for Books",
-      template: "%s | Next Bookstore",
+      default: "Librería Oculta - Tu Destino Único para Libros",
+      template: "%s | Librería Oculta",
     },
     url: process.env.NEXT_PUBLIC_SITE_URL,
     images: [
@@ -46,11 +46,11 @@ export const metadata = {
   twitter: {
     card: "summary_large_image",
     title: {
-      default: "Next Bookstore - Your Ultimate Destination for Books",
-      template: "%s | Next Bookstore",
+      default: "Librería Oculta - Tu Destino Único para Libros",
+      template: "%s | Librería Oculta",
     },
     description:
-      "Discover your next favorite book at Next Bookstore! Browse our wide selection of bestsellers, new releases, and rare finds. Feed your reading passion!",
+      "Descubre tu próxima lectura favorita en Librería Oculta. Explora nuestra amplia selección de bestsellers, nuevos lanzamientos y rarezas. ¡Apoya tu pasión por la lectura!",
     creator: "@SatNaingDev",
     images: [`${process.env.NEXT_PUBLIC_SITE_URL}/default-og.jpg`],
   },
