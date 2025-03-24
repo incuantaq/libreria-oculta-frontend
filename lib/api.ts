@@ -12,6 +12,7 @@ const POST_GRAPHQL_FIELDS = `
   }
   categoryId
   slug
+  items
 `;
 
 
