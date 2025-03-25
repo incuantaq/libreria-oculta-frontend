@@ -28,7 +28,9 @@ type Payment = "cashOnDelivery" | "bankTransfer"
 export default function CheckoutSection() {
   const router = useRouter()
   const { cart } = useCartStore() // cart data from localStorage
-  const { cartData, totalPrice } = useCart() // fetched cart data
+  const [cartData, setCartData] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [totalPrice, setTotalPrice] = useState(0);
   const [shipping, setShipping] = useState<Shipping>("doorToDoor") // Shipping Method
   const [payment, setPayment] = useState<Payment>("cashOnDelivery") // Payment Method
   const [errorMsg, setErrorMsg] = useState<string | null>(null) // Form overall error message
@@ -42,11 +44,22 @@ export default function CheckoutSection() {
 
   const mounted = useMounted()
 
+  useEffect(() => {
+    if (cart?.length > 0) {
+      setCartData(cart);
+      setTotalPrice(
+        cart.reduce((acc, item) => acc + item.unitPrice * item.quantity, 0)
+      );
+    }
+    setIsLoading(false);
+
+  }, [cart])
+
   // update overallPrice when
   // totalPrice/shipping is updated
   useEffect(() => {
-    const shippingFee = shipping === "doorToDoor" ? 2000 : 0
-    setOverallPrice(Number(totalPrice.replace(",", "")) + shippingFee)
+    const shippingFee = shipping === "doorToDoor" ? 10000 : 0
+    setOverallPrice(Number(totalPrice + shippingFee))
   }, [totalPrice, shipping])
 
   if (!mounted) return <LoadingOverlay />
@@ -194,19 +207,19 @@ export default function CheckoutSection() {
 
           {/* Cart Items */}
           {cartData.map(item => (
-            <div key={item.id} className="flex items-center justify-between">
+            <div key={item?.id} className="flex items-center justify-between">
               <div className="max-w-[70%]">
-                {item.title}{" "}
-                <span className="font-light">x {item.quantity}</span>
+                {item?.title}{" "}
+                <span className="font-light">x {item?.quantity}</span>
               </div>
-              <span>{item.price} Ks</span>
+              <span>{item?.unitPrice} </span>
             </div>
           ))}
 
           <hr />
 
           {/* Coupon Code */}
-          <div>
+          {/* <div>
             <span className="font-medium">¿Tienes un cupón de descuento?</span>
             <div className="mt-1 flex justify-between">
               <input
@@ -221,14 +234,14 @@ export default function CheckoutSection() {
                 Aplicar
               </button>
             </div>
-          </div>
+          </div> 
+          <hr />*/}
 
-          <hr />
 
           {/* Subtotal */}
           <div className="flex items-center justify-between">
             <span className="font-medium">Subtotal</span>
-            <span className="font-semibold">{totalPrice} Ks</span>
+            <span className="font-semibold">{totalPrice} </span>
           </div>
 
           {/* Shipping */}

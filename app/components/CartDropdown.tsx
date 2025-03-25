@@ -13,14 +13,13 @@ import { useEffect, useState } from "react"
 
 const CartDropdown = () => {
   const { cart, removeFromCart, updateQuantity } = useCartStore()
-
   const [totalQuantity, setTotalQuantity] = useState(cart.length);
   const [isLoading, setIsLoading] = useState(true);
   const [cartData, setCartData] = useState<any[]>([]);
   const [totalPrice, setTotalPrice] = useState(0);
   
   useEffect(() => {
-    if (cart) {
+    if (cart?.length > 0) {
       setTotalQuantity(cart.length);
       setCartData(cart);
       setTotalPrice(
