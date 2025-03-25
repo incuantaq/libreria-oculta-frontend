@@ -11,12 +11,26 @@ import EmptyCartIcon from "@/icons/EmptyCartIcon"
 import LoadingIcon from "@/icons/LoadingIcon"
 import { useCartStore } from "@/store/client"
 import { useCart, useMounted } from "@/hooks"
+import { useEffect, useState } from "react"
 
 export default function CartItemSection() {
-  const { cartData, totalPrice, isLoading } = useCart()
   const { cart, removeFromCart, updateQuantity } = useCartStore()
+  const [cartData, setCartData] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   const mounted = useMounted()
+
+  useEffect(() => {
+    if (cart?.length > 0) {
+      setCartData(cart);
+      setTotalPrice(
+        cart.reduce((acc, item) => acc + item.unitPrice * item.quantity, 0)
+      );
+    }
+    setIsLoading(false);
+
+  }, [cart])
 
   return (
     <section className="mb-20 lg:mb-auto">
@@ -55,14 +69,14 @@ export default function CartItemSection() {
                 ) : (
                   cartData.map(item => (
                     <tr
-                      key={item.id}
+                      key={item?.id}
                       className="grid grid-cols-[auto_2fr_auto] grid-rows-[2fr_1fr_1fr_1fr] gap-x-2 border-b py-2 font-sans md:table-row"
                     >
                       <td className="row-span-4 w-32 md:w-20">
                         <div className="relative h-44 w-full md:h-36">
                           <Image
-                            src={item.image}
-                            alt={item.title}
+                            src={item?.image}
+                            alt={item?.title}
                             className="object-contain md:py-2"
                             fill
                             sizes="(min-width: 640px) 20vw, 50vw"
@@ -72,39 +86,38 @@ export default function CartItemSection() {
                       </td>
                       <td className="col-start-2 row-start-1 md:max-w-[10rem] md:pl-2">
                         <Link
-                          href={`/item/${item.slug}`}
+                          href={`/item/${item?.slug}`}
                           className="text-link font-medium italic opacity-80 line-clamp-2 md:!inline md:line-clamp-4"
                         >
-                          {item.title}
+                          {item?.title}
                         </Link>
                       </td>
                       <td className="col-span-2 col-start-2 row-start-2 md:text-right">
                         <span className="md:hidden">Price: </span>
                         <span className="font-medium">
-                          {item.price.toLocaleString()}Ks
+                          {item?.unitPrice}
                         </span>
                       </td>
                       <td className="col-span-2 col-start-2 row-start-3 md:text-center">
                         <button
                           type="button"
                           title="Reducir Cantidad"
-                          onClick={() => updateQuantity(item.id, "decrease")}
-                          className={`rounded border bg-skin-muted px-3 py-1 text-2xl leading-none ${
-                            item.quantity < 2
+                          onClick={() => updateQuantity(item?.id, "decrease")}
+                          className={`rounded border bg-skin-muted px-3 py-1 text-2xl leading-none ${item?.quantity < 2
                               ? "cursor-not-allowed bg-skin-muted opacity-75"
                               : ""
-                          }`}
-                          tabIndex={item.quantity < 2 ? -1 : 0}
+                            }`}
+                          tabIndex={item?.quantity < 2 ? -1 : 0}
                         >
                           -
                         </button>
                         <span className="mx-2 inline-block w-5 text-center">
-                          {item.quantity}
+                          {item?.quantity}
                         </span>
                         <button
                           type="button"
                           title="Aumentar Cantidad"
-                          onClick={() => updateQuantity(item.id, "increase")}
+                          onClick={() => updateQuantity(item?.id, "increase")}
                           className="rounded border bg-skin-muted px-3 py-1 text-2xl leading-none"
                         >
                           +
@@ -113,14 +126,14 @@ export default function CartItemSection() {
                       <td className="col-span-2 col-start-2 row-start-4 md:max-w-[5rem] md:text-right">
                         <span className="md:hidden">Total: </span>
                         <span className="inline-block w-28 text-lg font-medium">
-                          {(item.price * item.quantity).toLocaleString()}Ks
+                          {(item?.unitPrice * item?.quantity)}
                         </span>
                       </td>
                       <td className="col-span-1 col-start-3 row-span-1 row-start-1 md:text-center">
                         <button
                           title="Remove"
                           type="button"
-                          onClick={() => removeFromCart(item.id)}
+                          onClick={() => removeFromCart(item?.id)}
                         >
                           <CancelIcon className="stroke-skin-dark hover:stroke-2" />
                         </button>
@@ -137,7 +150,7 @@ export default function CartItemSection() {
             className="text-link mt-4 hidden items-center font-sans underline-offset-8 lg:inline-flex"
           >
             <CaretDownIcon className="rotate-90 stroke-skin-dark stroke-1" />{" "}
-            Continue Shopping
+            Continúa comprando
           </Link>
         </div>
         <div className="others my-4 flex flex-col gap-4 lg:my-0">
@@ -146,7 +159,7 @@ export default function CartItemSection() {
               htmlFor="order-notes"
               className="mb-2 font-sans font-semibold"
             >
-              Order Notes
+              Notas del Pedido
             </label>
             <textarea
               id="order-notes"

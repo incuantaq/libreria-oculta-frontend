@@ -5,17 +5,18 @@ import Image from "next/image"
 import HeartIcon from "@/icons/HeartIcon"
 import { useCartStore, useToastStore, useWishlistStore } from "@/store/client"
 import { useMounted } from "@/hooks"
+import { Book } from "app/(routes)/(home)/layouts/BooksSection"
 
-type Props = {
+interface Props extends Book {
   className?: string
-  id: number
+  id: number | string
   title: string
-  price: number
+  unitPrice: number
   slug: string
   image: string
 }
 
-const ItemCard = ({ className = "", id, title, price, slug, image }: Props) => {
+const ItemCard = ({ className = "", id, title, unitPrice, slug, image }: Props) => {
   const { cart, addToCart } = useCartStore()
   const { wishlist, toggleWishlist } = useWishlistStore()
   const { setToast } = useToastStore()
@@ -26,13 +27,13 @@ const ItemCard = ({ className = "", id, title, price, slug, image }: Props) => {
     if (alreadyAdded) {
       setToast({
         status: "info",
-        message: "The book is already added",
+        message: "El libro ya está en el carrito",
       })
     } else {
-      addToCart({ id, quantity: 1 })
+      addToCart({ id, quantity: 1, title, unitPrice, slug, image })
       setToast({
         status: "success",
-        message: "The book has been added to cart",
+        message: "El libro ha sido añadido al carrito",
       })
     }
   }
@@ -79,7 +80,7 @@ const ItemCard = ({ className = "", id, title, price, slug, image }: Props) => {
         </header>
         <div className="price mb-1 font-medium">
           <span>Precio: </span>
-          <span>{price.toLocaleString()}</span>
+          <span>{unitPrice}</span>
         </div>
         <div className="buttons flex gap-x-2 h-8">
           <button

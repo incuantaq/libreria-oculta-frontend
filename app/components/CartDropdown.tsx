@@ -9,12 +9,28 @@ import CartIcon from "@/icons/CartIcon"
 import CancelIcon from "@/icons/CancelIcon"
 import EmptyCartIcon from "@/icons/EmptyCartIcon"
 import { useCartStore } from "@/store/client"
-import { useCart } from "@/hooks"
+import { useEffect, useState } from "react"
 
 const CartDropdown = () => {
   const { cart, removeFromCart, updateQuantity } = useCartStore()
 
-  const { cartData, totalPrice, totalQuantity, isLoading } = useCart()
+  const [totalQuantity, setTotalQuantity] = useState(cart.length);
+  const [isLoading, setIsLoading] = useState(true);
+  const [cartData, setCartData] = useState<any[]>([]);
+  const [totalPrice, setTotalPrice] = useState(0);
+  
+  useEffect(() => {
+    if (cart) {
+      setTotalQuantity(cart.length);
+      setCartData(cart);
+      setTotalPrice(
+        cart.reduce((acc, item) => acc + item.unitPrice, 0)
+      );
+    }
+    setIsLoading(false);
+  }
+  , [cart]);
+
 
   return (
     <NavigationMenu.Item className="nav-menu-dropdown cart-dropdown">
@@ -24,7 +40,7 @@ const CartDropdown = () => {
         aria-controls="cart-content"
       >
         <CartIcon />
-        <span className="hidden md:inline">Cart</span>
+        <span className="hidden md:inline">Carrito</span>
         {totalQuantity > 0 && (
           <span
             aria-label={`Number of items: ${totalQuantity}`}
@@ -40,10 +56,10 @@ const CartDropdown = () => {
         className="absolute top-14 right-0 rounded-sm border border-skin-muted bg-skin-base p-4 shadow-lg"
       >
         <div className="mb-4 text-center font-serif text-base font-semibold">
-          My Shopping Cart
+          Mi carrito de compras
         </div>
         <div className="mb-4 max-h-80 overflow-y-auto">
-          {cart.length < 1 ? (
+          {cart?.length < 1 ? (
             <div className="flex h-36 items-center justify-center">
               <div className="mx-3 flex w-64 flex-col items-center">
                 <EmptyCartIcon className="h-12 w-12" />
@@ -55,21 +71,21 @@ const CartDropdown = () => {
           ) : (
             <ul>
               {isLoading ? (
-                <CartDropdownSkeleton num={cart.length} />
+                <CartDropdownSkeleton num={cart?.length} />
               ) : (
                 cartData.map(item => (
                   <li
-                    key={item.id}
+                    key={item?.id}
                     className="grid grid-cols-[auto_2fr_auto] grid-rows-[2fr_1fr_1fr] gap-x-2 border-b py-2 font-sans text-sm"
                   >
                     <div className="row-span-4 w-24">
                       <Link
-                        href={`/item/${item.slug}`}
+                        href={`/item/${item?.slug}`}
                         className="relative inline-block h-32 w-full"
                       >
                         <Image
-                          src={item.image}
-                          alt={item.title}
+                          src={item?.image}
+                          alt={item?.title}
                           className="object-contain py-1"
                           fill
                           sizes="(min-width: 640px) 20vw, 50vw"
@@ -80,45 +96,44 @@ const CartDropdown = () => {
                     <div className="col-start-2 row-start-1 w-36">
                       <NavigationMenu.Link asChild>
                         <Link
-                          href={`/item/${item.slug}`}
+                          href={`/item/${item?.slug}`}
                           className="text-link font-medium italic line-clamp-2"
                         >
-                          {item.title}
+                          {item?.title}
                         </Link>
                       </NavigationMenu.Link>
                     </div>
                     <div className="col-span-2 col-start-2 row-start-2">
-                      <span className="">Price: </span>
+                      <span className="">Precio: </span>
                       <span className="font-medium">
-                        {item.price.toLocaleString()}Ks
+                        {item?.unitPrice}
                       </span>
                     </div>
-                    <div className="col-span-2 col-start-2 row-start-3">
+                    {/* <div className="col-span-2 col-start-2 row-start-3">
                       <button
                         type="button"
                         title="Reduce Quantity"
-                        onClick={() => updateQuantity(item.id, "decrease")}
-                        className={`rounded-sm border bg-skin-muted py-1 px-3 leading-none ${
-                          item.quantity < 2
+                        onClick={() => updateQuantity(item?.id, "decrease")}
+                        className={`rounded-sm border bg-skin-muted py-1 px-3 leading-none ${item?.quantity < 2
                             ? "cursor-not-allowed bg-skin-muted opacity-75"
                             : ""
-                        }`}
-                        tabIndex={item.quantity < 2 ? -1 : 0}
+                          }`}
+                        tabIndex={item?.quantity < 2 ? -1 : 0}
                       >
                         -
                       </button>
                       <span className="mx-2 inline-block w-4 text-center">
-                        {item.quantity}
+                        {item?.quantity}
                       </span>
                       <button
                         type="button"
                         title="Reduce Quantity"
-                        onClick={() => updateQuantity(item.id, "increase")}
+                        onClick={() => updateQuantity(item?.id, "increase")}
                         className="rounded-sm border bg-skin-muted py-1 px-3 leading-none"
                       >
                         +
                       </button>
-                    </div>
+                    </div> */}
                     <div className="col-span-1 col-start-3 row-span-1 row-start-1">
                       <button
                         title="Remove"
@@ -137,13 +152,13 @@ const CartDropdown = () => {
 
         <hr />
         <div className="my-2 flex items-baseline justify-between">
-          <span className="text-base">Total Price :</span>
-          <span className="text-base font-semibold">{totalPrice} Ks</span>
+          <span className="text-base">Precio total :</span>
+          <span className="text-base font-semibold">{totalPrice}</span>
         </div>
         <div className="mb-2 flex items-baseline justify-between">
-          <span className="text-base">Shipping :</span>
+          <span className="text-base">Envío :</span>
           <span className="w-44 text-right font-sans text-xs italic opacity-75">
-            Taxes and shipping fee will be calculated at checkout
+            Impuestos de envío serán calculados en el checkout
           </span>
         </div>
         <div className="flex justify-between gap-x-2 text-base">
@@ -158,7 +173,7 @@ const CartDropdown = () => {
               href={`/cart`}
               className="outline-btn-color w-full rounded-sm py-1 text-center transition-colors duration-200"
             >
-              View Cart
+              Ver carrito
             </Link>
           </NavigationMenu.Link>
         </div>
