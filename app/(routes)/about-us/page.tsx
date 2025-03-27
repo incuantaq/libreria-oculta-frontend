@@ -23,31 +23,22 @@ export default function Page() {
           fill
         />
         <h1 className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-serif text-2xl font-bold capitalize text-skin-base">
-          About Us
+          Conócenos
         </h1>
       </div>
       <main className="padding-x max-width pt-6 lg:px-20">
         <Breadcrumb />
         <div className="grid gap-4 pb-12 md:grid-cols-2 md:grid-rows-3 lg:grid-cols-5">
           <section className="lg:col-span-3">
-            <h2 className="font-serif text-xl font-bold">Our Mission</h2>
+            <h2 className="font-serif text-xl font-bold">Misión</h2>
             <p className="my-2 font-sans">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
-              volutpat odio et dapibus dignissim. Praesent maximus tincidunt
-              ultricies. Nam sodales dolor arcu, non venenatis odio tempor eu
+            Fomentar el amor por la lectura y el conocimiento, ofreciendo libros que inspiran, educan y entretienen, en un espacio acogedor para todos los lectores.
             </p>
           </section>
           <section className="md:row-span-2 md:row-start-2 lg:col-span-3">
-            <h2 className="font-serif text-xl font-bold">What We Are</h2>
+            <h2 className="font-serif text-xl font-bold">¿Quiénes somos?:</h2>
             <p className="my-2 font-sans">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
-              volutpat odio et dapibus dignissim. Praesent maximus tincidunt
-              ultricies. Nam sodales dolor arcu, non venenatis odio tempor eu
-            </p>
-            <p className="my-2 font-sans">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
-              volutpat odio et dapibus dignissim. Praesent maximus tincidunt
-              ultricies. Nam sodales dolor arcu, non venenatis odio tempor eu
+            Somos una librería comprometida con acercarte a mundos extraordinarios a través de las páginas de cada libro. Aquí encuentras cultura, aprendizaje y pasión por la lectura.
             </p>
           </section>
           <div className="image-container md:col-start-2 md:row-span-3 md:row-start-1 lg:col-span-2 lg:col-start-4">

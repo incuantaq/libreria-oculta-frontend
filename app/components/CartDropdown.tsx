@@ -20,12 +20,12 @@ const CartDropdown = () => {
   
   useEffect(() => {
     if (cart?.length > 0) {
-      setTotalQuantity(cart.length);
       setCartData(cart);
-      setTotalPrice(
-        cart.reduce((acc, item) => acc + item.unitPrice, 0)
-      );
     }
+    setTotalQuantity(cart.length);
+    setTotalPrice(
+      cart.reduce((acc, item) => acc + item.unitPrice, 0)
+    );
     setIsLoading(false);
   }
   , [cart]);
@@ -137,7 +137,9 @@ const CartDropdown = () => {
                       <button
                         title="Remove"
                         type="button"
-                        onClick={() => removeFromCart(item.id)}
+                        onClick={() => {
+                          removeFromCart(item.id)
+                        }}
                       >
                         <CancelIcon className="opacity-75 hover:stroke-2 hover:opacity-100" />
                       </button>
