@@ -7,6 +7,8 @@ import { useCartStore, useToastStore, useWishlistStore } from "@/store/client"
 import { useMounted } from "@/hooks"
 import { Book } from "app/(routes)/(home)/layouts/BooksSection"
 
+
+
 interface Props extends Book {
   className?: string
   id: number | string
@@ -14,9 +16,13 @@ interface Props extends Book {
   unitPrice: number
   slug: string
   image: string
+  sys: {
+    id: string
+  }
+  sysId: number | string
 }
 
-const ItemCard = ({ className = "", id, title, unitPrice, slug, image }: Props) => {
+const ItemCard = ({ className = "", id, title, unitPrice, slug, image, sysId }: Props) => {
   const { cart, addToCart } = useCartStore()
   const { wishlist, toggleWishlist } = useWishlistStore()
   const { setToast } = useToastStore()
@@ -30,7 +36,7 @@ const ItemCard = ({ className = "", id, title, unitPrice, slug, image }: Props) 
         message: "El libro ya está en el carrito",
       })
     } else {
-      addToCart({ id, quantity: 1, title, unitPrice, slug, image })
+      addToCart({ id, quantity: 1, title, unitPrice, slug, image, sysId })
       setToast({
         status: "success",
         message: "El libro ha sido añadido al carrito",

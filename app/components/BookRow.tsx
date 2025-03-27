@@ -29,6 +29,7 @@ export default function BookRow({ slug, books }: Props) {
   return (
     <div className="cards-container">
       {books[slug]?.data.map(({ id, attributes }) => {
+        console.log("id", id);
         console.log("attributes", attributes);
         const { slug, price, title, image } = attributes
         return (
@@ -45,6 +46,7 @@ export default function BookRow({ slug, books }: Props) {
             unitPrice={price}
             slug={slug}
             title={title}
+            sysId={id}
             image={getOptimizedImage(image)}
           />
         )
