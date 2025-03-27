@@ -41,8 +41,8 @@ export default function BookRow({ slug, books }: Props) {
                 ? "sm:last:hidden md:sm:last:flex"
                 : ""
             }`}
-            id={id}
-            price={price}
+            id={slug}
+            unitPrice={price}
             slug={slug}
             title={title}
             image={getOptimizedImage(image)}

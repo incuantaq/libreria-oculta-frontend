@@ -25,6 +25,21 @@ const Toast = () => {
     }, 100)
   }, [toast, setToast])
 
+  const translateStatus = (status = 'success') => {
+    switch (status) {
+      case "success":
+        return "Éxito!"
+      case "info":    
+        return "Info!"
+      case "warning":
+        return "Alerta!"
+      case "error":   
+        return "Error!"
+      default:
+        return "Info!"
+    }
+  }
+
   return (
     <RadixToast.Provider swipeDirection="right" duration={2500}>
       <RadixToast.Root
@@ -35,7 +50,7 @@ const Toast = () => {
         <RadixToast.Title
           className={`mb-1 text-base font-bold capitalize delay-200 ${toastObj?.status} [grid-area:_title]`}
         >
-          {open ? `${toastObj?.status}!` : ""}
+          {open ? `${translateStatus(toastObj?.status)}!` : ""}
         </RadixToast.Title>
         <RadixToast.Description asChild>
           <span className="m-0 text-[13px] leading-[1.3] text-skin-dark [grid-area:_description]">

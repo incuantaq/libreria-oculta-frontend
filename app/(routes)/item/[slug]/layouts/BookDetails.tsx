@@ -34,10 +34,10 @@ export default function BookDetails({ slug, initialData }: Props) {
   const price = initialData?.unitPrice
 
   const handleAddToCart = () => {
-    addToCart({ id, quantity })
+    addToCart({ id, quantity: 1, title, unitPrice: price, slug, image: bookImageObj })
     setToast({
       status: "success",
-      message: "The book has been added to cart",
+      message: "El libro ha sido añadido al carrito",
     })
   }
 
@@ -76,7 +76,7 @@ export default function BookDetails({ slug, initialData }: Props) {
         <hr className="my-4 md:my-6" />
 
         <div className="grid grid-cols-2 gap-y-2 md:grid-cols-3 md:gap-y-4 lg:grid-cols-4">
-          <div>Author :</div>
+          <div>Autor :</div>
           <div className="md:col-span-2 lg:col-span-3">{authorName}</div>
 
           {/* <div>Categories :</div>
@@ -94,7 +94,7 @@ export default function BookDetails({ slug, initialData }: Props) {
             ))}
           </div> */}
 
-          <div>Availibility : </div>
+          <div>Disponibilidad : </div>
           <div className="md:col-span-2 lg:col-span-3">
             En Stock
           </div>
@@ -116,8 +116,8 @@ export default function BookDetails({ slug, initialData }: Props) {
             <span className="mx-2 md:mx-4 md:text-2xl">{quantity}</span>
             <button
               type="button"
-              title="Reduce Quantity"
-              onClick={() => setQuantity(prev => prev + 1)}
+              title="Increase Quantity"
+              onClick={() => setQuantity(prev => prev + (prev < initialData.items ? 1 : 0))}
               className="rounded border bg-skin-muted px-2 text-2xl leading-none md:px-3 md:text-3xl"
             >
               +
@@ -134,9 +134,9 @@ export default function BookDetails({ slug, initialData }: Props) {
             onClick={handleAddToCart}
             className="primary-btn-color flex w-full items-center justify-center gap-x-4 rounded py-2 text-center text-lg font-medium"
           >
-            Add To Cart
+            Agregar al carrito
           </button>
-          <button
+          {/* <button
             type="button"
             onClick={handleAddToWishlist}
             className="outline-btn-color flex w-full items-center justify-center gap-x-4 rounded border-2 py-2 text-center text-lg font-medium"
@@ -155,7 +155,7 @@ export default function BookDetails({ slug, initialData }: Props) {
                 <LoadingIcon className="!mb-0 h-7 w-7" /> Loading ...
               </span>
             )}
-          </button>
+          </button> */}
         </div>
 
         <SocialGroup className="!justify-start" />

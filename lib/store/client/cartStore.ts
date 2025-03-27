@@ -1,8 +1,9 @@
+import { Book } from "app/(routes)/(home)/layouts/BooksSection"
 import { create } from "zustand"
 import { persist } from "zustand/middleware"
 
 /* ===== Cart Store ===== */
-type CartItem = {
+interface CartItem extends Book {
   id: number
   quantity: number
   timestamp?: number

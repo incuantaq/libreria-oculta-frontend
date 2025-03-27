@@ -21,7 +21,7 @@ type mappedCategory = {
   name: string;
   slug: string;
 }
-type Book = {
+export type Book = {
   author: string;
   categoryId: string;
   coverImage: {
@@ -130,7 +130,7 @@ const BooksSection = ({
     setOurCategories(ourCategories)
     
   }, [contextValue])
-
+  
   
   return (
     <div id="books" className="py-14">

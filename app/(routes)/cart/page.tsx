@@ -5,7 +5,7 @@ export const metadata = {
   title: "Carrito",
   openGraph: {
     title: "Carrito",
-    url: `${process.env.NEXT_PUBLIC_SITE_URL}/carrito`,
+    url: `${process.env.NEXT_PUBLIC_SITE_URL}/cart`,
   },
   twitter: { title: "Carrito" },
 }
