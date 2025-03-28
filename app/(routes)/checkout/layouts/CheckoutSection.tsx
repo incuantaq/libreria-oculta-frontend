@@ -22,8 +22,24 @@ type Inputs = {
   orderNotes: string
 }
 
-type Shipping = "pickup" | "doorToDoor"
-type Payment = "cashOnDelivery" | "bankTransfer"
+import { SHIPPING_OPTIONS, Payment, Shipping, ShippingOption} from "./types.ts";
+
+
+
+
+/* const getMetadata = async (selectedBook: string) => {
+  try {
+    const metadataPromise = await fetch(`/api/metadata/?id=${selectedBook}`, {
+      method: "GET",
+    });
+    console.log("metadataPromise", metadataPromise.json())
+    return await metadataPromise.json();
+  } catch (error) {
+    console.error("Error fetching metadata:", error);
+    return null;
+  }
+}
+ */
 
 export default function CheckoutSection() {
   const router = useRouter()
@@ -32,7 +48,7 @@ export default function CheckoutSection() {
   const [isLoading, setIsLoading] = useState(true);
   const [totalPrice, setTotalPrice] = useState(0);
   const [shipping, setShipping] = useState<Shipping>("doorToDoor") // Shipping Method
-  const [payment, setPayment] = useState<Payment>("cashOnDelivery") // Payment Method
+  const [payment, setPayment] = useState<Payment>("contraentrega") // Payment Method
   const [errorMsg, setErrorMsg] = useState<string | null>(null) // Form overall error message
   const [overallPrice, setOverallPrice] = useState(0) // Overall Price
 
@@ -68,8 +84,39 @@ export default function CheckoutSection() {
     router.back()
   }
 
-  const onSubmit: SubmitHandler<Inputs> = data => {
-    console.log({ ...data, shipping, payment })
+  const onSubmit: SubmitHandler<Inputs> = async data => {
+    let preferenceData: any | null = null;
+    try {
+      
+      const cartMetadata = await Promise.all(cartData.map(async ({sysId}) => {
+        const metadataPromise = await fetch(`/api/metadata/?id=${sysId}`, {
+          method: "GET",
+        });
+        return await metadataPromise.json();
+      }));
+
+      const response = await fetch("/api/preference", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          metadata: cartMetadata,
+          items: cartData,
+          shipping: SHIPPING_OPTIONS[shipping],
+        }),
+    });
+  
+    preferenceData = await response.json(); 
+    console.log("Preference created:", preferenceData);
+
+  } catch (error) {
+    console.error("Error creating preference:", error);
+  }
+  finally {
+      if(preferenceData?.init_point)
+      window.open(preferenceData.init_point, "_blank");
+  }
   }
 
   return (
@@ -212,7 +259,7 @@ export default function CheckoutSection() {
                 {item?.title}{" "}
                 <span className="font-light">x {item?.quantity}</span>
               </div>
-              <span>{item?.unitPrice} </span>
+              <span>{item?.unitPrice * item?.quantity} </span>
             </div>
           ))}
 
@@ -253,80 +300,44 @@ export default function CheckoutSection() {
               aria-label="Elegir Tipo De Envío"
               onValueChange={(val: Shipping) => setShipping(val)}
             >
-              <div
-                className="relative flex items-center rounded
-              focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-skin-accent-dark"
-              >
-                <RadioGroup.Item
-                  className="absolute right-4 h-5 w-5 cursor-pointer rounded-full shadow-skin-accent outline-none"
-                  value="doorToDoor"
-                  id="doorToDoor"
-                  onChange={() => setShipping("doorToDoor")}
+              {Object.entries(SHIPPING_OPTIONS).map(([key, option]) => (
+                <div
+                  key={key}
+                  className="relative flex items-center rounded focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-skin-accent-dark"
                 >
-                  <RadioGroup.Indicator asChild>
-                    <svg
-                      className="h-7 w-7 scale-110 stroke-skin-accent-dark stroke-2"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M7 12.5l3 3 7-7"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      ></path>
-                      <path
-                        d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      ></path>
-                    </svg>
-                  </RadioGroup.Indicator>
-                </RadioGroup.Item>
-                <label
-                  className="ml-auto w-full cursor-pointer rounded bg-skin-gray bg-opacity-40 p-4 text-left font-bold leading-none text-skin-dark shadow-sm"
-                  htmlFor="doorToDoor"
-                >
-                  A Domicilio:{" "}
-                  <span className="block text-sm font-normal">+10.000 COP</span>
-                </label>
-              </div>
-
-              <div
-                className="relative flex items-center rounded
-                focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-skin-accent-dark"
-              >
-                <RadioGroup.Item
-                  className="absolute right-4 h-5 w-5 cursor-pointer rounded-full shadow-skin-accent
-                    outline-none"
-                  value="pickup"
-                  id="pickup"
-                >
-                  <RadioGroup.Indicator asChild>
-                    <svg
-                      className="h-7 w-7 scale-110 stroke-skin-accent-dark stroke-2"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M7 12.5l3 3 7-7"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      ></path>
-                      <path
-                        d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      ></path>
-                    </svg>
-                  </RadioGroup.Indicator>
-                </RadioGroup.Item>
-                <label
-                  className="ml-auto w-full cursor-pointer rounded bg-skin-gray bg-opacity-40 p-4 text-left font-bold leading-none text-skin-dark shadow-sm"
-                  htmlFor="pickup"
-                >
-                  Recoger en Tienda
-                </label>
-              </div>
+                  <RadioGroup.Item
+                    className="absolute right-4 h-5 w-5 cursor-pointer rounded-full shadow-skin-accent outline-none"
+                    value={option?.type}
+                    id={option?.type}
+                  >
+                    <RadioGroup.Indicator asChild>
+                      <svg
+                        className="h-7 w-7 scale-110 stroke-skin-accent-dark stroke-2"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M7 12.5l3 3 7-7"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></path>
+                        <path
+                          d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></path>
+                      </svg>
+                    </RadioGroup.Indicator>
+                  </RadioGroup.Item>
+                  <label
+                    className="ml-auto w-full cursor-pointer rounded bg-skin-gray bg-opacity-40 p-4 text-left font-bold leading-none text-skin-dark shadow-sm"
+                    htmlFor={option.type}
+                  >
+                    {option.label}:{" "}
+                    <span className="block text-sm font-normal">{option.description}</span>
+                  </label>
+                </div>
+              ))}
             </RadioGroup.Root>
           </div>
 
@@ -341,21 +352,21 @@ export default function CheckoutSection() {
           {/* Payment Method */}
           <RadioGroup.Root
             className="flex flex-col gap-3"
-            defaultValue="cashOnDelivery"
+            defaultValue="contraentrega"
             aria-label="Choose Payment Transfer Method"
             onValueChange={(val: Payment) => setPayment(val)}
           >
             <div className="flex items-center">
               <RadioGroup.Item
                 className="h-5 w-5 cursor-default rounded-full bg-skin-muted shadow-[0_0_0_2px] shadow-skin-accent outline-none focus-within:border-2 focus-within:border-skin-accent"
-                value="cashOnDelivery"
-                id="cashOnDelivery"
+                value="contraentrega"
+                id="contraentrega"
               >
                 <RadioGroup.Indicator className="relative flex h-full w-full items-center justify-center after:block after:h-3 after:w-3 after:rounded-[50%] after:bg-skin-accent after:content-['']" />
               </RadioGroup.Item>
               <label
                 className="ml-auto w-11/12 py-2 pl-2 text-left font-bold leading-none text-skin-dark"
-                htmlFor="cashOnDelivery"
+                htmlFor="contraentrega"
               >
                 Pago Contra Entrega
               </label>
@@ -366,14 +377,14 @@ export default function CheckoutSection() {
             <div className="flex items-start">
               <RadioGroup.Item
                 className="h-5 w-5 cursor-default rounded-full bg-skin-muted shadow-[0_0_0_2px] shadow-skin-accent outline-none focus-within:border-2 focus-within:border-skin-accent"
-                value="bankTransfer"
-                id="bankTransfer"
+                value="mercadoPago"
+                id="mercadoPago"
               >
                 <RadioGroup.Indicator className="relative flex h-full w-full items-center justify-center after:block after:h-3 after:w-3 after:rounded-[50%] after:bg-skin-accent after:content-['']" />
               </RadioGroup.Item>
               <label
                 className="ml-auto w-11/12 pl-2 text-left font-bold leading-none text-skin-dark"
-                htmlFor="bankTransfer"
+                htmlFor="mercadoPago"
               >
                 MercadoPago
                 <span className="mt-1 block text-sm font-normal">

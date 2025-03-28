@@ -9,6 +9,7 @@ import HeartIcon from "@/icons/HeartIcon"
 import LoadingIcon from "@/icons/LoadingIcon"
 import { useMounted } from "@/hooks"
 import { useCartStore, useToastStore, useWishlistStore } from "@/store/client"
+import { init } from "next/dist/compiled/webpack/webpack"
 
 type Props = {
   slug: string
@@ -25,6 +26,8 @@ export default function BookDetails({ slug, initialData }: Props) {
   const { setToast } = useToastStore()
 
   const mounted = useMounted()
+
+  console.log("initialData", initialData)
   
   const id = initialData?.slug
   const bookImageObj = initialData?.coverImage.url
@@ -32,9 +35,11 @@ export default function BookDetails({ slug, initialData }: Props) {
   const title = initialData?.title
   const description = initialData?.description
   const price = initialData?.unitPrice
+  const sysId = initialData?.sys.id
 
   const handleAddToCart = () => {
-    addToCart({ id, quantity: 1, title, unitPrice: price, slug, image: bookImageObj })
+    console.log("sysId", sysId)
+    addToCart({ id, quantity: 1, title, unitPrice: price, slug, image: bookImageObj, sysId })
     setToast({
       status: "success",
       message: "El libro ha sido añadido al carrito",

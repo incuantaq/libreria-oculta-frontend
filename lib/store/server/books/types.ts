@@ -31,7 +31,23 @@ export interface BookQueryProps {
 }
 
 export type Books = GetResponse<Book[]>
+export type ContentfulBooks = GetResponse<ContentfulBook[]>
 
+export interface ContentfulBook {
+  sys: {
+    id: string
+  }
+  title: string
+  author: string
+  excerpt: string
+  unitPrice: number
+  categoryId: string
+  slug: string
+  items: number
+  coverImage: {
+    url: string
+  }
+}
 export interface Book {
   id: number
   attributes: {
