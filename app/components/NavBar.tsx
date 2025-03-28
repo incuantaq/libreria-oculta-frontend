@@ -68,47 +68,13 @@ const NavBar = () => {
 
           <NavigationMenu.List className="flex basis-1/3 gap-x-2 text-lg md:gap-x-4">
             <NavigationMenu.Item className="nav-menu-dropdown hidden md:list-item">
-              <NavigationMenu.Trigger
-                className="flex h-full items-center gap-1 outline-8"
-                aria-controls="category-content"
+              <Link
+                href="/about-us"
+                className="block p-2 font-serif underline decoration-dotted hover:bg-skin-muted hover:decoration-solid"
+                onClick={closeNav}
               >
-                Category{" "}
-                <CaretDownIcon
-                  aria-hidden
-                  className="dropdown-caret transition-transform ease-in-out"
-                />
-              </NavigationMenu.Trigger>
-              <NavigationMenu.Content
-                id="category-content"
-                className="absolute top-14 border border-skin-muted bg-skin-base p-4 shadow-lg lg:-left-1/2"
-              >
-                <div className="flex gap-x-4">
-                  <div className="flex basis-1/2 flex-col gap-y-4">
-                    <LinkItem title="Best Seller" href="best-seller">
-                      Discover the most captivating literary works that have won
-                      the hearts of bookworms
-                    </LinkItem>
-                    <LinkItem title="New Arrivals" href="new-arrivals">
-                      Explore the latest and greatest literary works of fresh
-                      titles and exciting authors
-                    </LinkItem>
-                  </div>
-                  <div className="basis-1/2 divide-y">
-                    <CollapsibleMenu
-                      title="Mystery & Suspense"
-                      menuList={mysteryMenuList}
-                    />
-                    <CollapsibleMenu
-                      title="Education & Profession"
-                      menuList={educationMenuList}
-                    />
-                    <CollapsibleMenu
-                      title="Literature & Fiction"
-                      menuList={literatureList}
-                    />
-                  </div>
-                </div>
-              </NavigationMenu.Content>
+                Conócenos
+              </Link>
             </NavigationMenu.Item>
 
             <NavigationMenu.Item className="nav-menu">
@@ -184,70 +150,6 @@ const NavBar = () => {
                 <span>Home</span>
               </Link>
             </NavigationMenu.Item>
-            <NavigationMenu.Item className="list-item w-full py-2">
-              <Collapsible.Root>
-                <Collapsible.Trigger
-                  aria-controls="category-content-mobile"
-                  className="flex h-full w-full items-center justify-between px-2 text-xl"
-                >
-                  Category{" "}
-                  <CaretDownIcon
-                    aria-hidden
-                    className="dropdown-caret transition-transform ease-in-out"
-                  />
-                </Collapsible.Trigger>
-                <Collapsible.Content id="category-content-mobile">
-                  <ul className="my-2 flex flex-col px-2 font-sans">
-                    <li>
-                      <NavigationMenu.Link asChild>
-                        <Link
-                          href="/categories/best-seller"
-                          className="block p-2 font-serif underline decoration-dotted hover:bg-skin-muted hover:decoration-solid"
-                          onClick={closeNav}
-                        >
-                          Best Seller
-                        </Link>
-                      </NavigationMenu.Link>
-                    </li>
-                    <li>
-                      <NavigationMenu.Link asChild>
-                        <Link
-                          href="/categories/new-arrivals"
-                          className="block p-2 font-serif underline decoration-dotted hover:bg-skin-muted hover:decoration-solid"
-                          onClick={closeNav}
-                        >
-                          New Arrivals
-                        </Link>
-                      </NavigationMenu.Link>
-                    </li>
-                    <li>
-                      <CollapsibleMenu
-                        title="Mystery & Suspense"
-                        mobile
-                        menuList={mysteryMenuList}
-                        onClick={closeNav}
-                      />
-                    </li>
-                    <li>
-                      <CollapsibleMenu
-                        title="Education & Profession"
-                        mobile
-                        menuList={educationMenuList}
-                        onClick={closeNav}
-                      />
-                    </li>
-                    <li>
-                      <CollapsibleMenu
-                        title="Literature & Fiction"
-                        mobile
-                        menuList={literatureList}
-                        onClick={closeNav}
-                      />
-                    </li>
-                  </ul>
-                </Collapsible.Content>
-              </Collapsible.Root>
-            </NavigationMenu.Item>
 
             {navLinks.map(nav => (
               <NavigationMenu.Item
@@ -272,17 +174,7 @@ const NavBar = () => {
                 className={`flex items-center gap-x-2 py-1 px-2 text-xl`}
                 onClick={closeNav}
               >
-                <span>About Us</span>
-              </Link>
-            </NavigationMenu.Item>
-
-            <NavigationMenu.Item className={`flex w-full flex-col`}>
-              <Link
-                href="/contact-us"
-                className={`flex items-center gap-x-2 py-1 px-2 text-xl`}
-                onClick={closeNav}
-              >
-                <span>Contact Us</span>
+                <span>Conócenos</span>
               </Link>
             </NavigationMenu.Item>
           </NavigationMenu.List>

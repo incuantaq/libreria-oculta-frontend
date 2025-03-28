@@ -34,7 +34,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="about-us md:row-span-4">
+        {/* <div className="about-us md:row-span-4">
           <h2 className="my-1 font-serif text-xl font-semibold">Quick Links</h2>
           {quickLinks.map(({ id, href, title }) => (
             <div key={id}>
@@ -46,10 +46,10 @@ const Footer = () => {
               </Link>
             </div>
           ))}
-        </div>
+        </div> */}
 
         <div className="services md:row-span-4">
-          <h2 className="my-1 font-serif text-xl font-semibold">Contact</h2>
+          <h2 className="my-1 font-serif text-xl font-semibold">Contácto</h2>
           <p className="mb-3 text-sm">
             Email:{" "}
             <a href="mailto:info@nextbook.com" className="text-link mt-1 block">
@@ -57,13 +57,13 @@ const Footer = () => {
             </a>
           </p>
           <p className="mb-3 text-sm">
-            Phone:{" "}
+            Teléfono:{" "}
             <a href="tel:+9-59-50-960-70" className="text-link mt-1 block">
               +959 50-960-70
             </a>
           </p>
           <p className="mb-3 text-sm">
-            Address:{" "}
+            Dirección:{" "}
             <span className="mt-1 block">
               No (77), 123 Main Street, Thingangyun, Yangon
             </span>
@@ -96,11 +96,11 @@ const Footer = () => {
 }
 
 const quickLinks = [
-  { id: 1, title: "About Us", href: "/about-us" },
-  { id: 2, title: "Contact Us", href: "/contact-us" },
-  { id: 3, title: "FAQ", href: "/faq" },
-  { id: 4, title: "Return Policy", href: "/return-policy" },
-  { id: 5, title: "Terms & Conditions", href: "/" },
+  { id: 1, title: "Conócenos", href: "/about-us" },
+  // { id: 2, title: "Contact Us", href: "/contact-us" },
+  // { id: 3, title: "FAQ", href: "/faq" },
+  // { id: 4, title: "Return Policy", href: "/return-policy" },
+  // { id: 5, title: "Terms & Conditions", href: "/" },
 ]
 
 export default Footer
