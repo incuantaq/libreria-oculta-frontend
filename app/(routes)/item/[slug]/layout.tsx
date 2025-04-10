@@ -1,10 +1,9 @@
 import { getBook } from "@/store/server/books/queries"
 
-type MetaProps = {
-  params: { slug: string }
-}
+type Params = Promise<{ slug: string }>
 
-export async function generateMetadata({ params }: MetaProps) {
+
+export async function generateMetadata(params: Params) {
   const { slug } = await params
   const bookData = await getBook(slug)
   const title = bookData.data[0].attributes.title
