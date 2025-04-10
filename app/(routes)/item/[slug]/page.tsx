@@ -1,10 +1,8 @@
 import BookView from "./BookView"
 
-type Props = {
-  params: { slug: string }
-}
+type Params = Promise<{ slug: string }>
 
-export default async function Page({ params }: Props) {
+export default async function Page({ params }: { params: Params }) {
   const { slug } = await params;
 
   return (
