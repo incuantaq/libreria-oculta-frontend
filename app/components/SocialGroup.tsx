@@ -34,32 +34,32 @@ const SocialGroup = ({ className = "", placeBottom = false }: Props) => {
 const socialData = [
   {
     id: 1,
-    title: "Follow NextBookstore on Facebook",
-    href: "https://fb.com/satnaing.dev",
+    title: "Síguenos en Facebook",
+    href: "https://fb.com/libreria.oculta.2023",
     icon: (
       <FacebookIcon className="stroke-skin-dark stroke-2 opacity-80 hover:opacity-100" />
     ),
   },
   {
     id: 2,
-    title: "Follow NextBookstore on Instagram",
-    href: "https://ig.com/satnaing.dev",
+    title: "Síguenos en Instagram",
+    href: "https://instagram.com/libreriaocultacajica",
     icon: (
       <InstagramIcon className="stroke-skin-dark stroke-2 opacity-80 hover:opacity-100" />
     ),
   },
-  {
+/*   {
     id: 3,
     title: "Join NextBookstore Telegram channel",
     href: "https://telegram.com/satnaing.dev",
     icon: (
       <TelegramIcon className="stroke-skin-dark stroke-2 opacity-80 hover:opacity-100" />
     ),
-  },
+  }, */
   {
     id: 4,
-    title: "Send NextBookstore an Email",
-    href: "mailto:contact@satnaing.dev",
+    title: "Envíanos un correo",
+    href: "mailto:info@libreriaoculta.co",
     icon: (
       <MailIcon className="stroke-skin-dark stroke-2 opacity-80 hover:opacity-100" />
     ),
