@@ -1,7 +1,3 @@
-import { mercadopago } from "../../utils";
-import {Payment} from "mercadopago";
-
-
 async function updateSingleItem(query: string, preview = false): Promise<any> {
   return fetch(
     `https://api.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}`, 
@@ -17,7 +13,7 @@ async function updateSingleItem(query: string, preview = false): Promise<any> {
   ).then((response) => response.json());
 }
 
-export async function POST(req: Request, res: Response) {
+export async function POST(req: Request) {
   const body: {data: {id: string, type: string}} = await req.json();
   try{
     const response = await fetch(`https://api.mercadopago.com/v1/payments/${body.data?.id!}`, {

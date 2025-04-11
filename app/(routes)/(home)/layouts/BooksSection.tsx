@@ -12,6 +12,7 @@ import { useEffect, useState } from "react"
 type Category = {
   id: number;
   attributes: {
+    description: string | undefined
     name: string;
     slug: string;
   };
@@ -37,10 +38,10 @@ export type Book = {
 };
 
 function reduceItems(categories: Category[], items: Book[]) {
-  const result = {};
+  const result: Record<string, { data: any[] }> = {};
 
   // Mapping categories for quick access
-  const categoryMap = {};
+  const categoryMap: Record<number, { id: number; attributes: { name: string; slug: string; description?: string } }> = {};
   categories.forEach((category: Category) => {
     categoryMap[category.id] = {
       id: category.id,
@@ -51,10 +52,6 @@ function reduceItems(categories: Category[], items: Book[]) {
       }
     };
   });
-
-  console.log("categoryMap", categoryMap);
-  console.log("nonMappedItems", items);
-
 
   // Iterating through items to match with categories
   items?.forEach((item: any) => {
@@ -96,9 +93,6 @@ function reduceItems(categories: Category[], items: Book[]) {
       });
     }
   });
-
-  console.log("result", result);
-
   return result;
 }
 
@@ -129,7 +123,7 @@ const BooksSection = ({
     setBooksDemo(demo)
     setOurCategories(ourCategories)
     
-  }, [contextValue])
+  }, [contextValue, categories.data])
   
   
   return (

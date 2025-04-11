@@ -13,7 +13,7 @@ const BookView = ({ name }: { name: string }) => {
   useEffect(() => {
     if (contextValue) {
       setData(
-        contextValue.find((item) => item.slug === name)
+        contextValue.find((item: { slug: string; }) => item.slug === name)
       );
     }
 

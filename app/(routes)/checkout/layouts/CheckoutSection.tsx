@@ -22,10 +22,7 @@ type Inputs = {
   orderNotes: string
 }
 
-import { SHIPPING_OPTIONS, Payment, Shipping, ShippingOption} from "./types.ts";
-
-
-
+import { SHIPPING_OPTIONS, Payment, Shipping, ShippingOption} from "./types";
 
 /* const getMetadata = async (selectedBook: string) => {
   try {
