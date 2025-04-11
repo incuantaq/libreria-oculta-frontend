@@ -52,20 +52,20 @@ const Footer = () => {
           <h2 className="my-1 font-serif text-xl font-semibold">Contácto</h2>
           <p className="mb-3 text-sm">
             Email:{" "}
-            <a href="mailto:info@nextbook.com" className="text-link mt-1 block">
-              info@nextbook.com
+            <a href="mailto:info@libreriaoculta.co" className="text-link mt-1 block">
+              info@libreriaoculta.co
             </a>
           </p>
           <p className="mb-3 text-sm">
             Teléfono:{" "}
-            <a href="tel:+9-59-50-960-70" className="text-link mt-1 block">
-              +959 50-960-70
+            <a href="tel:+57-313-286-2916" className="text-link mt-1 block">
+              +57 313-286-2916
             </a>
           </p>
           <p className="mb-3 text-sm">
             Dirección:{" "}
             <span className="mt-1 block">
-              No (77), 123 Main Street, Thingangyun, Yangon
+              Calle 3 # 2 - 53. Piso 2. Cajicá
             </span>
           </p>
         </div>

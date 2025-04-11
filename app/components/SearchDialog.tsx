@@ -47,22 +47,23 @@ const SearchDialog = () => {
       <Dialog.Trigger asChild>
         <button
           type="button"
-          aria-label="Search"
+          aria-label="Buscar un libro"
           className="flex h-full items-center gap-x-2 py-1 pl-1 pr-2"
         >
-          <SearchIcon /> <span className="hidden md:inline">Search</span>
+          <SearchIcon /> <span className="hidden md:inline">Buscar</span>
         </button>
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 z-20 bg-skin-dark bg-opacity-70 backdrop-blur-sm" />
         <Dialog.Content className="data-[state=open]:animate-contentShow fixed top-1/4 bottom-3/4 left-1/2 z-30 max-h-[85vh] w-[90vw] max-w-[450px] -translate-x-1/2 -translate-y-1/2 rounded-md bg-none focus:outline-none">
+          <Dialog.Title className="sr-only">Barra de Búsqueda</Dialog.Title>
           <div className="flex w-full justify-between">
             <label className="relative block w-full">
               <span className="absolute inset-y-0 left-0 flex items-center pl-2 opacity-75">
                 <SearchIcon />
               </span>
               <input
-                placeholder="Find your next favourite book"
+                placeholder="Encuentra tu próximo libro favorito"
                 type="text"
                 onChange={e => handleInput(e)}
                 className="block w-full rounded border-2 border-skin-base 
@@ -98,7 +99,36 @@ const SearchDialog = () => {
               }`}
             >
               <ul className="wishlist-table h-full overflow-auto">
-                {result?.data.map(({ id, attributes }) => {
+                {[
+                  {
+                    id: 1,
+                    attributes: {
+                      slug: "crash",
+                      price: 70000,
+                      title: "Crash",
+                      image: {
+                        data: [
+                          {
+                            attributes: {
+                              formats: {
+                                small: {
+                                  url: "https://m.media-amazon.com/images/I/81IM6vEPvLL.jpg"
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      },
+                      author_id: {
+                        data: {
+                          attributes: {
+                            name: "Freida McFadden"
+                          }
+                        }
+                      }
+                    }
+                  },
+                ].map(({ id, attributes }) => {
                   const { slug, price, title, image, author_id } = attributes
                   return (
                     <li key={id}>

@@ -129,7 +129,7 @@ const NavBar = () => {
           <CancelIcon className="scale-125" />
         </button>
         <div className="flex flex-col items-center gap-2">
-          <div className="font-serif text-2xl font-medium">Next Book Store</div>
+          <div className="font-serif text-2xl font-medium">Librería Oculta</div>
           <p className="text-center">
             Tu librería favorita <br />
             en Cajicá
