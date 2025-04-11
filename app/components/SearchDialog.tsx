@@ -42,6 +42,80 @@ const SearchDialog = () => {
     setOpen(prevState => !prevState)
   }
 
+  // Update the hardcoded image object to match the Image type
+  const mockBook = {
+    id: 1,
+    attributes: {
+      slug: "crash",
+      price: 70000,
+      title: "Crash",
+      image: {
+        data: [{
+          id: 1,
+          attributes: {
+            name: "crash-cover",
+            alternativeText: null,
+            caption: null,
+            width: 800,
+            height: 1200,
+            formats: {
+              small: {
+                url: "https://m.media-amazon.com/images/I/81IM6vEPvLL.jpg",
+                name: "crash-cover-small",
+                hash: "crash-cover-small",
+                ext: ".jpg",
+                mime: "image/jpeg",
+                path: null,
+                width: 400,
+                height: 600,
+                size: 100,
+                provider_metadata: {
+                  public_id: "crash-cover-small",
+                  resource_type: "image"
+                }
+              },
+              thumbnail: {
+                url: "https://m.media-amazon.com/images/I/81IM6vEPvLL.jpg",
+                name: "crash-cover-thumbnail",
+                hash: "crash-cover-thumbnail",
+                ext: ".jpg",
+                mime: "image/jpeg",
+                path: null,
+                width: 200,
+                height: 300,
+                size: 50,
+                provider_metadata: {
+                  public_id: "crash-cover-thumbnail",
+                  resource_type: "image"
+                }
+              }
+            },
+            hash: "crash-cover",
+            ext: ".jpg",
+            mime: "image/jpeg",
+            size: 200,
+            url: "https://m.media-amazon.com/images/I/81IM6vEPvLL.jpg",
+            previewUrl: null,
+            provider: "cloudinary",
+            provider_metadata: {
+              public_id: "crash-cover",
+              resource_type: "image"
+            },
+            createdAt: new Date(),
+            updatedAt: new Date()
+          }
+        }]
+      },
+      author_id: {
+        data: {
+          attributes: {
+            name: "Freida McFadden"
+          }
+        }
+      }
+    }
+  }
+
   return (
     <Dialog.Root open={open} onOpenChange={handleDialog}>
       <Dialog.Trigger asChild>
@@ -99,36 +173,7 @@ const SearchDialog = () => {
               }`}
             >
               <ul className="wishlist-table h-full overflow-auto">
-                {[
-                  {
-                    id: 1,
-                    attributes: {
-                      slug: "crash",
-                      price: 70000,
-                      title: "Crash",
-                      image: {
-                        data: [
-                          {
-                            attributes: {
-                              formats: {
-                                small: {
-                                  url: "https://m.media-amazon.com/images/I/81IM6vEPvLL.jpg"
-                                }
-                              }
-                            }
-                          }
-                        ]
-                      },
-                      author_id: {
-                        data: {
-                          attributes: {
-                            name: "Freida McFadden"
-                          }
-                        }
-                      }
-                    }
-                  },
-                ].map(({ id, attributes }) => {
+                {[mockBook].map(({ id, attributes }) => {
                   const { slug, price, title, image, author_id } = attributes
                   return (
                     <li key={id}>
