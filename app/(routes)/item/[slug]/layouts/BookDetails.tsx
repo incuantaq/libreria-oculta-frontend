@@ -39,7 +39,18 @@ export default function BookDetails({ slug, initialData }: Props) {
 
   const handleAddToCart = () => {
     console.log("sysId", sysId)
-    addToCart({ id, quantity: 1, title, unitPrice: price, slug, image: bookImageObj, sysId })
+    addToCart({
+      id, quantity: 1, title, unitPrice: price, slug, image: bookImageObj, sysId,
+      author: "",
+      categoryId: "",
+      coverImage: {
+        url: ""
+      },
+      excerpt: "",
+      sys: {
+        id: ""
+      }
+    })
     setToast({
       status: "success",
       message: "El libro ha sido añadido al carrito",

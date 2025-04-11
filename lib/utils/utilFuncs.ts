@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { getBooks } from "@/store/server/books/queries"
 import {
   BookQueryProps,

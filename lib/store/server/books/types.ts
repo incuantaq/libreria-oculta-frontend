@@ -26,7 +26,7 @@ export interface BookQueryProps {
   slug?: string
   limit?: number
   pageNum?: number
-  ids?: number[]
+  ids?: string[]
   searchTerm?: string
 }
 

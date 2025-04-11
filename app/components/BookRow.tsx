@@ -13,8 +13,6 @@ type Props = {
 
 export default function BookRow({ slug, books }: Props) {
 
-  console.log("books", books);
-  console.log("slug", slug);
   /* const { data, isError, isLoading } = useBooks({
     initialData: books[slug],
     filter: { slug, limit: 5 },
@@ -29,26 +27,26 @@ export default function BookRow({ slug, books }: Props) {
   return (
     <div className="cards-container">
       {books[slug]?.data.map(({ id, attributes }) => {
-        console.log("id", id);
-        console.log("attributes", attributes);
+
         const { slug, price, title, image } = attributes
         return (
           <ItemCard
             key={id}
-            className={`${
-              books[slug]?.data.length >= 5
+            className={`${books[slug]?.data.length >= 5
                 ? "last:hidden sm:last:flex sm:even:hidden md:last:hidden md:even:flex lg:last:flex"
                 : books[slug]?.data.length === 4
-                ? "sm:last:hidden md:sm:last:flex"
-                : ""
-            }`}
+                  ? "sm:last:hidden md:sm:last:flex"
+                  : ""}`}
             id={slug}
             unitPrice={price}
             slug={slug}
             title={title}
-            sysId={id}
-            image={getOptimizedImage(image)}
-          />
+            sysId={id.toString()}
+            image={getOptimizedImage(image)} sys={{
+              id: ""
+            }} author={""} categoryId={""} coverImage={{
+              url: ""
+            }} excerpt={""}          />
         )
       })}
     </div>

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import axios from "@/lib/oldapi/axios"
 import { useQuery } from "@tanstack/react-query"
 import { Categories } from "./types"

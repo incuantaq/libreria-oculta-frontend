@@ -28,13 +28,13 @@ export const useCart = () => {
     }
 
   // Quantity Mapping
-  const qtyMap = new Map<number, number>()
+  const qtyMap = new Map<string, number>()
   cart.forEach(item => {
     qtyMap.set(item.id, item.quantity)
   })
 
   // Timestamp Mapping
-  const timestampMap = new Map<number, number>()
+  const timestampMap = new Map<string, number>()
   cart.forEach(item => {
     timestampMap.set(item.id, item.timestamp || 1)
   })
@@ -48,8 +48,8 @@ export const useCart = () => {
         price,
         slug,
         image: getOptimizedImage(image),
-        quantity: qtyMap.get(item.id) || 1,
-        timestamp: timestampMap.get(item.id) || 1,
+        quantity: qtyMap.get(item.id.toString()) || 1,
+        timestamp: timestampMap.get(item.id.toString()) || 1,
       }
     })
     .sort((a, b) => b.timestamp - a.timestamp)

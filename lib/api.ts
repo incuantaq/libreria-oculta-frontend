@@ -40,7 +40,6 @@ function extractPostEntries(fetchResponse: any): any[] {
   return fetchResponse?.data?.pinturaCollection?.items || fetchResponse?.data?.bookCollection?.items;
 }
 function extractPostEntriesREST(fetchResponse: any): any[] {
-  console.log("AAAAAAA", fetchResponse)
   return fetchResponse?.items || [];
 }
 
@@ -60,7 +59,6 @@ export async function getPreviewPostBySlug(slug: string | null): Promise<any> {
 
 type CollectionType = 'book' | 'pintura';
 export async function getAllPosts(isDraftMode: boolean, collectionType: CollectionType): Promise<any[]> {
-  console.log("ENTERED getAllPosts")
   const entries = await fetchGraphQL(
     `query {
       bookCollection( preview: false) {
@@ -71,7 +69,6 @@ export async function getAllPosts(isDraftMode: boolean, collectionType: Collecti
     }`,
     isDraftMode,
   );
-  console.log("AAAAAAA", extractPostEntries(entries))
   return extractPostEntries(entries);
 }
 

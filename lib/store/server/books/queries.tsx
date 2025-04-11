@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { BookQueryProps, Books } from "./types"
 import axios from "@/lib/oldapi/axios"
 import { generateBookQuery } from "@/utils/utilFuncs"

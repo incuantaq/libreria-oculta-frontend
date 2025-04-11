@@ -4,16 +4,18 @@ import { persist } from "zustand/middleware"
 
 /* ===== Cart Store ===== */
 interface CartItem extends Book {
-  id: number
+  id: string
   quantity: number
   timestamp?: number
+  image?: string
+  sysId?: string
 }
 
 type CartState = {
   cart: CartItem[]
   addToCart: (bookObj: CartItem) => void
-  removeFromCart: (id: number) => void
-  updateQuantity: (id: number, action: "increase" | "decrease") => void
+  removeFromCart: (id: string) => void
+  updateQuantity: (id: string, action: "increase" | "decrease") => void
 }
 
 export const useCartStore = create<CartState>()(
@@ -38,14 +40,14 @@ function addCartItem(state: CartItem[], bookObj: CartItem) {
   return { cart: [...cartArray, newItem] }
 }
 
-function removeCartItem(state: CartItem[], id: number) {
+function removeCartItem(state: CartItem[], id: string) {
   const removedCart = state.filter(item => item.id !== id)
   return { cart: [...removedCart] }
 }
 
 function updateItemQuantity(
   state: CartItem[],
-  id: number,
+  id: string,
   action: "increase" | "decrease"
 ) {
   const objIndex = state.findIndex(obj => obj.id == id)
